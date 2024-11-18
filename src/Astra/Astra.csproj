@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+        <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+        <EnableAotAnalyzer>true</EnableAotAnalyzer>
+        <IsAotCompatible>true</IsAotCompatible>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\vendor\Astra.ImGui\Astra.ImGui\Astra.ImGui.csproj" />
+    </ItemGroup>
+
+</Project>
