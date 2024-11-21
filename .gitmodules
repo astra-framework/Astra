@@ -1,3 +1,3 @@
-[submodule "vendor/Astra.ImGui"]
-	path = vendor/Astra.ImGui
-	url = https://github.com/astra-framework/Astra.ImGui.git
+[submodule "vendor/Astra.DearImGui"]
+	path = vendor/Astra.DearImGui
+	url = https://github.com/astra-framework/Astra.DearImGui.git
