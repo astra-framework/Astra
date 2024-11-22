@@ -1,6 +1,3 @@
-﻿namespace Astra;
+﻿using System.Runtime.CompilerServices;
 
-public class AssemblyInfo
-{
-    
-}
+[assembly: DisableRuntimeMarshalling]
