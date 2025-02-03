@@ -1,11 +1,11 @@
 ﻿namespace Astra.Data;
 
-public struct Padding(int left, int top, int right, int bottom)
+public readonly struct Padding(float left, float top, float right,float bottom)
 {
-    public int Left = left;
-    public int Top = top;
-    public int Right = right;
-    public int Bottom = bottom;
+    public readonly float Left = left;
+    public readonly float Top = top;
+    public readonly float Right = right;
+    public readonly float Bottom = bottom;
 
-    public Padding(int all) : this(all, all, all, all) {}
+    public Padding(float all) : this(all, all, all, all) {}
 }
