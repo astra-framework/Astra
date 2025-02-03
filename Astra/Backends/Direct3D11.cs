@@ -113,7 +113,7 @@ public unsafe class Direct3D11 : IBackend
             ImGui.PushStyleColor(ImGuiCol.ChildBg, Color.Transparent.ToVector4());
             // Currently messy workaround for Windows maximized padding, TODO make this cleaner (also in Titlebar.cs and any other places)
             ImGui.SetCursorPosX(OperatingSystem.IsWindows() && windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X : 0);
-            ImGui.BeginChild("content_child", new Vector2(backendWidth - (OperatingSystem.IsWindows() && windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X * 2 : 0), backendHeight - Titlebar.GetHeight(windowContext) - (OperatingSystem.IsWindows() && windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.Y : 0)), ImGuiChildFlags.AlwaysUseWindowPadding);
+            ImGui.BeginChild("content_child", new Vector2(backendWidth - (OperatingSystem.IsWindows() && windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X * 2 : 0), backendHeight - Titlebar.GetHeight(windowContext) - (OperatingSystem.IsWindows() && windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.Y : 0)), ImGuiChildFlags.AlwaysUseWindowPadding, ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
             {
                 ImGui.PopStyleColor();
                 OnRender();
