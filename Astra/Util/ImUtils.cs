@@ -49,4 +49,9 @@ public static unsafe class ImUtils
     {
         return ImGui.GetColorU32(color.ToVector4(alpha));
     }
+
+    public static Vector2 GetCenter(this ImRect rect)
+    {
+        return new Vector2((rect.Min.X + rect.Max.X) / 2, (rect.Min.Y + rect.Max.Y) / 2);
+    }
 }

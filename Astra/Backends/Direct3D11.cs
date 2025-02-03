@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Numerics;
 using Astra.Components.Internal;
+using Astra.Managers;
 using Astra.Types.Interfaces;
 using Astra.Util;
 using Hexa.NET.ImGui;
@@ -103,8 +104,9 @@ public unsafe class Direct3D11 : IBackend
         ImGui.SetNextWindowPos(new Vector2(0, 0), ImGuiCond.Once);
         ImGui.SetNextWindowSize(new Vector2(backendWidth, backendHeight), ImGuiCond.Always);
         ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING : Vector2.Zero);
-        ImGui.Begin("main", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.NoBackground | ImGuiWindowFlags.NoMove);
+        ImGui.Begin("main", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.NoBackground | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoBringToFrontOnFocus);
         {
+
             ImGui.PopStyleVar();
             Titlebar.WindowsTitlebar(windowContext);
             ImGui.SetCursorPosY(Titlebar.GetHeight(windowContext));
@@ -117,9 +119,9 @@ public unsafe class Direct3D11 : IBackend
                 OnRender();
             }
             ImGui.EndChild();
+            NotificationManager.RenderNotifications();
         }
         ImGui.End();
-
         ImGui.Render();
         ID3D11RenderTargetView* lRenderTargetView = renderTargetView;
         context->OMSetRenderTargets(1, &lRenderTargetView, null);

@@ -121,9 +121,47 @@ internal static class Program
         Radius = 3
     };
 
+    private static readonly CheckboxStyle checkboxStyle = new CheckboxStyle
+    {
+        Font = font,
+        Size = 20,
+        BorderThickness = 1,
+        Radius = 3,
+        FadeinSpeed = 400,
+        FadeoutSpeed = 400,
+        BackgroundColor =  Color.FromArgb(62, 62, 62),
+        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
+        BackgroundActiveColor = Color.FromArgb(22, 22, 22),
+        BackgroundDisabledColor = Color.FromArgb(12, 12, 12),
+
+        CheckColor = Color.White,
+        CheckHoverColor = Color.White,
+        CheckActiveColor = Color.White,
+        CheckDisabledColor = Color.FromArgb(128, 128, 128),
+
+        BorderColor = Color.FromArgb(50, 50, 50),
+        BorderHoverColor = Color.FromArgb(50, 50, 50),
+        BorderActiveColor = Color.FromArgb(50, 50, 50),
+        BorderDisabledColor = Color.FromArgb(50, 50, 50),
+
+        TextColor = Color.White,
+        TextHoverColor = Color.White,
+        TextActiveColor = Color.White,
+        TextDisabledColor = Color.FromArgb(128, 128, 128)
+    };
+
     private static void Main()
     {
         FontManager.AddFonts(font, font2, icon_font);
+        NotificationManager.SetStyle(new NotificationStyle
+        {
+            Font = font,
+            TextColor = Color.White,
+            BackgroundColor = Color.FromArgb(32, 32, 32),
+            BorderColor = Color.FromArgb(50, 50, 50),
+            Radius = 3f,
+            BorderThickness = 1
+        });
         IWindow window = Application.CreateWindow(WindowOptions.DEFAULT, new TitlebarStyle
         {
             Height = 40,
@@ -143,6 +181,8 @@ internal static class Program
 
 
     private static string test99 = "333333332";
+    private static int test0 = 0;
+    private static bool test1 = false;
 
     private static void onRender()
     {
@@ -160,7 +200,13 @@ internal static class Program
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
             if (Button.Icon("test_button_1", FontAwesome6.FILE, icon_style))
             {
-                Console.WriteLine("Button Pressed!");
+                test0++;
+                NotificationManager.ShowNotification($"Test{test0}", $"Button Pressed! {test0}", 3);
+            }
+            ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
+            if (Checkbox.Normal("##no_label", ref test1, checkboxStyle))
+            {
+                Console.WriteLine("Checkbox Pressed!");
             }
         }
         Panel.End();
