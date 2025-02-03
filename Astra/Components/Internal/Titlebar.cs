@@ -24,14 +24,17 @@ public static unsafe class Titlebar
         Vector2 pos = ImGui.GetCursorScreenPos();
         ImRect titlebarRect = new ImRect(pos, pos + new Vector2(window->Size.X, GetHeight(context)));
         drawList->AddRectFilled(titlebarRect.Min, titlebarRect.Max, style.BackgroundColor.ToUint32());
+
+
+        ImGui.BeginGroup();
+        contentRender?.Invoke();
+        ImGui.EndGroup();
+
         if (style.BorderThickness > 0)
         {
             drawList->AddLine(titlebarRect.Max with { X = 0 }, titlebarRect.Max, style.BorderColor.ToUint32(), style.BorderThickness);
         }
 
-        ImGui.BeginGroup();
-        contentRender?.Invoke();
-        ImGui.EndGroup();
         ImGui.SameLine();
 
         ImGui.SetCursorPosX(window->Size.X - titlebarRect.Max.Y);
