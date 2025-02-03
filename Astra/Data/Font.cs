@@ -11,7 +11,7 @@ public unsafe class Font
 
     internal ImFont* ImFont { get; set; }
 
-    internal ImFont* GetImFont()
+    public ImFont* GetImFont()
     {
         return ImFont == null ? ImGui.GetFont() : ImFont;
     }
