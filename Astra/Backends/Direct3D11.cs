@@ -104,7 +104,7 @@ public unsafe class Direct3D11 : IBackend
         ImGui.SetNextWindowPos(new Vector2(0, 0), ImGuiCond.Once);
         ImGui.SetNextWindowSize(new Vector2(backendWidth, backendHeight), ImGuiCond.Always);
         ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING : Vector2.Zero);
-        ImGui.Begin("main", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.NoBackground | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoBringToFrontOnFocus);
+        ImGui.Begin("main", ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.NoBackground | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoBringToFrontOnFocus | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
         {
 
             ImGui.PopStyleVar();
