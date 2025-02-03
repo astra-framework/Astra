@@ -109,7 +109,7 @@ public unsafe class Direct3D11 : IBackend
 
             ImGui.PopStyleVar();
             Titlebar.WindowsTitlebar(windowContext);
-            ImGui.SetCursorPosY(Titlebar.GetHeight(windowContext));
+            ImGui.SetCursorPosY(Titlebar.GetHeight(windowContext) + Titlebar.GetBorderThickness());
             ImGui.PushStyleColor(ImGuiCol.ChildBg, Color.Transparent.ToVector4());
             // Currently messy workaround for Windows maximized padding, TODO make this cleaner (also in Titlebar.cs and any other places)
             ImGui.SetCursorPosX(OperatingSystem.IsWindows() && windowContext.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X : 0);

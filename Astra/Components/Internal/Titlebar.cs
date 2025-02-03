@@ -131,6 +131,11 @@ public static unsafe class Titlebar
         style = titlebarStyle;
     }
 
+    internal static float GetBorderThickness()
+    {
+        return style.BorderThickness;
+    }
+
     internal static float GetHeight(IWindow context)
     {
         float height = style.Height + style.BorderThickness;
