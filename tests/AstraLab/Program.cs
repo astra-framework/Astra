@@ -1,0 +1,168 @@
+﻿using System.Drawing;
+using System.Numerics;
+using Astra;
+using Astra.Components;
+using Astra.Components.Internal;
+using Astra.Data;
+using Astra.Managers;
+using Astra.Platforms.Windows;
+using Astra.Styles;
+using Astra.Types.Enums;
+using Astra.Types.Interfaces;
+using Hexa.NET.ImGui;
+
+namespace AstraLab;
+
+internal static class Program
+{
+    private static readonly Font font = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inter-Regular.ttf"), 16);
+    private static readonly Font font2 = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inter-Regular.ttf"), 18);
+    private static readonly Font icon_font = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FontAwesome6.FILE_NAME), 16, [0x0021, 0xF8FF]);
+
+    private static readonly ButtonStyle button_style = new()
+    {
+        Padding = new Padding(10),
+        Font = font,
+        TextAlign = TextAlign.Center,
+        Display = Display.Flex,
+
+        BorderThickness = 1,
+        Radius = 3,
+        FadeinSpeed = 400,
+        FadeoutSpeed = 400,
+
+        BackgroundColor = Color.FromArgb(62, 62, 62),
+        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
+        BackgroundActiveColor = Color.FromArgb(22, 22, 22),
+        BackgroundDisabledColor = Color.FromArgb(12, 12, 12),
+
+        TextColor = Color.White,
+        TextHoverColor = Color.White,
+        TextActiveColor = Color.White,
+        TextDisabledColor = Color.FromArgb(128, 128, 128),
+
+        BorderColor = Color.FromArgb(50, 50, 50),
+        BorderHoverColor = Color.FromArgb(50, 50, 50),
+        BorderActiveColor = Color.FromArgb(50, 50, 50),
+        BorderDisabledColor = Color.FromArgb(50, 50, 50)
+    };
+
+    private static readonly IconButtonStyle icon_style = new()
+    {
+        Padding = new Padding(10),
+        Font = icon_font,
+        Display = Display.Block,
+
+        BorderThickness = 1,
+        Radius = 3,
+        FadeinSpeed = 400,
+        FadeoutSpeed = 400,
+
+        BackgroundColor = Color.FromArgb(62, 62, 62),
+        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
+        BackgroundActiveColor = Color.FromArgb(22, 22, 22),
+        BackgroundDisabledColor = Color.FromArgb(12, 12, 12),
+
+        TextColor = Color.White,
+        TextHoverColor = Color.White,
+        TextActiveColor = Color.White,
+        TextDisabledColor = Color.FromArgb(128, 128, 128),
+
+        BorderColor = Color.FromArgb(50, 50, 50),
+        BorderHoverColor = Color.FromArgb(50, 50, 50),
+        BorderActiveColor = Color.FromArgb(50, 50, 50),
+        BorderDisabledColor = Color.FromArgb(50, 50, 50)
+    };
+
+    private static readonly TextInputStyle textinput_style = new()
+    {
+        Padding = new Vector2(8, 4),
+        Height = 40,
+        Font = font,
+        Display = Display.Flex,
+
+        BorderThickness = 1,
+        Radius = 3,
+        FadeinSpeed = 400,
+        FadeoutSpeed = 400,
+
+        BackgroundColor = Color.FromArgb(62, 62, 62),
+        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
+        BackgroundActiveColor = Color.FromArgb(62, 62, 62),
+        BackgroundDisabledColor = Color.FromArgb(12, 12, 12),
+
+        TextColor = Color.White,
+        TextHoverColor = Color.White,
+        TextActiveColor = Color.White,
+        TextDisabledColor = Color.FromArgb(128, 128, 128),
+
+        BorderColor = Color.FromArgb(50, 50, 50),
+        BorderHoverColor = Color.FromArgb(50, 50, 50),
+        BorderActiveColor = Color.FromArgb(70, 70, 70),
+        BorderDisabledColor = Color.FromArgb(50, 50, 50)
+    };
+
+    private static readonly PanelStyle main_panel = new()
+    {
+        BackgroundColor = Color.FromArgb(26, 26, 26),
+        BorderThickness = 0,
+        Display = Display.Fill,
+        Padding = new Vector2(12, 8),
+        Radius = 0
+    };
+
+    private static readonly TooltipStyle tooltip_style = new()
+    {
+        Font = font,
+        BackgroundColor = Color.FromArgb(32, 32, 32),
+        BorderColor = Color.FromArgb(50, 50, 50),
+        BorderThickness = 1,
+        Padding = new Vector2(4, 4),
+        Radius = 3
+    };
+
+    private static void Main()
+    {
+        FontManager.AddFonts(font, font2, icon_font);
+        IWindow window = Application.CreateWindow(WindowOptions.DEFAULT, new TitlebarStyle
+        {
+            Height = 40,
+            BackgroundColor = Color.FromArgb(32, 32, 32),
+            BorderColor = Color.FromArgb(50, 50, 50),
+            BorderThickness = 1
+        }, onRender, onTitlebarContent);
+        window.Poll();
+    }
+
+
+    private static void onTitlebarContent()
+    {
+        ImGui.SetCursorPos(new Vector2(12, 12));
+        Text.Normal("AstraLab", font, Color.White);
+    }
+
+
+    private static string test99 = "333333332";
+
+    private static void onRender()
+    {
+        Panel.Begin("main_child", main_panel);
+        {
+            if (Button.Normal("test_button_0", "Hello World", button_style))
+            {
+                Console.WriteLine("Button Pressed!");
+            }
+            Tooltip.Normal("test", tooltip_style);
+            ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
+            Text.Normal("Text Input", font2, Color.FromArgb(180, 255, 255, 255));
+            ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 2);
+            TextInput.Normal("test01", ref test99, 120, textinput_style);
+            ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
+            if (Button.Icon("test_button_1", FontAwesome6.FILE, icon_style))
+            {
+                Console.WriteLine("Button Pressed!");
+            }
+        }
+        Panel.End();
+    }
+}

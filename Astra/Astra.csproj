@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        
+        <NoWarn>CA1416</NoWarn>
+
+        <!--Analyzers-->
+        <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+        <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+        <EnableAotAnalyzer>true</EnableAotAnalyzer>
+        <IsAotCompatible>true</IsAotCompatible>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Hexa.NET.ImGui" Version="2.2.5" />
+      <PackageReference Include="Hexa.NET.ImGui.Backends" Version="1.0.13" />
+      <PackageReference Include="TerraFX.Interop.Windows" Version="10.0.26100.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Platforms\Linux\" />
+      <Folder Include="Platforms\Mac\" />
+    </ItemGroup>
+
+</Project>
