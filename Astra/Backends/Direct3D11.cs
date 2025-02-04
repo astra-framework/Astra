@@ -122,6 +122,7 @@ public unsafe class Direct3D11 : IBackend
             NotificationManager.RenderNotifications();
         }
         ImGui.End();
+
         ImGui.Render();
         ID3D11RenderTargetView* lRenderTargetView = renderTargetView;
         context->OMSetRenderTargets(1, &lRenderTargetView, null);

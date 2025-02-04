@@ -15,7 +15,7 @@ namespace AstraLab;
 
 internal static class Program
 {
-    private static readonly Font font = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inter-Regular.ttf"), 16);
+    internal static readonly Font font = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inter-Regular.ttf"), 16);
     private static readonly Font font2 = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Inter-Regular.ttf"), 18);
     private static readonly Font icon_font = new(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FontAwesome6.FILE_NAME), 16, [0x0021, 0xF8FF]);
 
@@ -190,8 +190,10 @@ internal static class Program
         {
             if (Button.Normal("test_button_0", "Hello World", button_style))
             {
-                Console.WriteLine("Button Pressed!");
+                TestModal.Show = true;
+                ImGui.OpenPopup(TestModal.TITLE);
             }
+            TestModal.Render();
             Tooltip.Normal("test", tooltip_style);
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
             Text.Normal("Text Input", font2, Color.FromArgb(180, 255, 255, 255));

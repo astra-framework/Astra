@@ -38,13 +38,13 @@ public static unsafe class Titlebar
         ImGui.SameLine();
 
         ImGui.SetCursorPosX(window->Size.X - titlebarRect.Max.Y);
-        if (windowsTitlebarButton("close_caption_btn", Platforms.Windows.Platform.CLOSE_ICON, false, new Vector2(style.Height)))
+        if (WindowsTitlebarButton("close_caption_btn", Platforms.Windows.Platform.CLOSE_ICON, false, new Vector2(style.Height)))
         {
             context.Close();
         }
         ImGui.SameLine();
         ImGui.SetCursorPosX(window->Size.X - titlebarRect.Max.Y * 2 + (OperatingSystem.IsWindows() && context.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X : 0));
-        if (windowsTitlebarButton("toggle_state_caption_btn", context.IsMaximized() ? Platforms.Windows.Platform.RESTORE_ICON : Platforms.Windows.Platform.MAXIMIZE_ICON, false, new Vector2(style.Height)))
+        if (WindowsTitlebarButton("toggle_state_caption_btn", context.IsMaximized() ? Platforms.Windows.Platform.RESTORE_ICON : Platforms.Windows.Platform.MAXIMIZE_ICON, false, new Vector2(style.Height)))
         {
             if (context.IsMaximized())
                 context.Restore();
@@ -53,7 +53,7 @@ public static unsafe class Titlebar
         }
         ImGui.SameLine();
         ImGui.SetCursorPosX(window->Size.X - titlebarRect.Max.Y * 3 + (OperatingSystem.IsWindows() && context.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X : 0));
-        if (windowsTitlebarButton("minimize_caption_btn", Platforms.Windows.Platform.MINIMIZE_ICON, false, new Vector2(style.Height)))
+        if (WindowsTitlebarButton("minimize_caption_btn", Platforms.Windows.Platform.MINIMIZE_ICON, false, new Vector2(style.Height)))
         {
             context.Minimize();
         }
@@ -74,7 +74,7 @@ public static unsafe class Titlebar
 
     }
 
-    private static bool windowsTitlebarButton(string id, string icon, bool disabled, Vector2 size)
+    internal static bool WindowsTitlebarButton(string id, string icon, bool disabled, Vector2 size)
     {
         ImGuiWindow* window = ImGuiP.GetCurrentWindow();
         if (window->SkipItems == 1) return false;
