@@ -150,6 +150,27 @@ internal static class Program
         TextDisabledColor = Color.FromArgb(128, 128, 128)
     };
 
+    /*private static readonly ComboBoxStyle comboBoxStyle = new()
+    {
+        Padding = new Vector2(0, 3),
+        Font = font,
+        BackgroundColor = Color.FromArgb(62, 62, 62),
+        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
+        BorderColor = Color.FromArgb(102, 102, 102),
+        TextColor = Color.White,
+        BorderThickness = 1f,
+        Radius = 3f
+    };*/
+
+    private static readonly SelectableComboStyle selectableComboStyle = new()
+    {
+        Font = font,
+        BackgroundColor = Color.FromArgb(80, 80, 80),
+        BackgroundHoverColor = Color.FromArgb(100, 100, 100),
+        BackgroundActiveColor = Color.FromArgb(60, 60, 60),
+        TextColor = Color.White
+    };
+
     private static void Main()
     {
         FontManager.AddFonts(font, font2, icon_font);
@@ -183,9 +204,22 @@ internal static class Program
     private static string test99 = "333333332";
     private static int test0 = 0;
     private static bool test1 = false;
+    private static bool test2 = false;
+    private static bool test3 = false;
 
     private static void onRender()
     {
+        ComboBoxStyle comboBoxStyle = new()
+        {
+            Padding = new Vector2(4, 4),
+            Font = font,
+            BackgroundColor = Color.FromArgb(62, 62, 62),
+            BackgroundHoverColor = Color.FromArgb(124, 124, 124),
+            BorderColor = Color.FromArgb(102, 102, 102),
+            TextColor = Color.White,
+            BorderThickness = 1f,
+            Radius = 3f
+        };
         Panel.Begin("main_child", main_panel);
         {
             if (Button.Normal("test_button_0", "Hello World", button_style))
@@ -210,6 +244,17 @@ internal static class Program
             {
                 Console.WriteLine("Checkbox Pressed!");
             }
+            ComboBox.Normal("combo_1", "Preview", comboBoxStyle, () =>
+            {
+                if (Selectable.Combo("Test0", ref test2, selectableComboStyle))
+                {
+
+                }
+                if (Selectable.Combo("Test1", ref test3, selectableComboStyle))
+                {
+
+                }
+            });
         }
         Panel.End();
     }
