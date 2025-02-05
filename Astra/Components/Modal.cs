@@ -26,7 +26,7 @@ public static unsafe class Modal
                 ImDrawList* drawList = ImGui.GetWindowDrawList();
                 Vector2 pos = ImGui.GetCursorScreenPos();
                 ImRect titlebarRect = new ImRect(pos, pos + new Vector2(window->Size.X, style.TitlebarHeight));
-                drawList->AddRectFilled(titlebarRect.Min, titlebarRect.Max, style.TitlebarBackgroundColor.ToUint32());
+                drawList->AddRectFilled(titlebarRect.Min, titlebarRect.Max, style.TitlebarBackgroundColor.ToUint32(),style.Rounding, ImDrawFlags.RoundCornersTop);
                 if (style.TitlebarBorderThickness > 0)
                 {
                     drawList->AddLine(titlebarRect.Max with { X = 0 }, titlebarRect.Max, style.TitlebarBorderColor.ToUint32(), style.TitlebarBorderThickness);
