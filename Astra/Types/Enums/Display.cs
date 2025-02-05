@@ -2,6 +2,7 @@
 
 public enum Display
 {
+    None,
     Block,
     Fill,
     Flex,

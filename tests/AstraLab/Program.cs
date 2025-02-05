@@ -232,7 +232,7 @@ internal static class Program
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
             Text.Normal("Text Input", font2, Color.FromArgb(180, 255, 255, 255));
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 2);
-            TextInput.Normal("test01", ref test99, 120, textinput_style);
+            TextInput.Normal("test01", ref test99, 120, "",textinput_style);
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
             if (Button.Icon("test_button_1", FontAwesome6.FILE, icon_style))
             {

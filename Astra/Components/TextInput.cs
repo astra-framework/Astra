@@ -13,7 +13,7 @@ public static unsafe class TextInput
     private static readonly Dictionary<uint, float> fade_timers = [];
     private static readonly List<uint> active_states = [];
 
-    public static void Normal(string id, ref string text, uint maxLength, in TextInputStyle style, bool disabled = false, Vector2 size = default)
+    public static void Normal(string id, ref string text, uint maxLength, string placeHolder, in TextInputStyle style, bool disabled = false, int remainingWidth = 0, Vector2 size = default)
     {
         ImGuiWindow* parentWindow = ImGuiP.GetCurrentWindow();
         ImGuiIO* io = ImGui.GetIO();
@@ -21,11 +21,11 @@ public static unsafe class TextInput
         size.Y = style.Height;
         if (style.Display == Display.Flex)
         {
-            size.X = parentWindow->Size.X - parentWindow->WindowPadding.X * 2;
+            size.X = parentWindow->Size.X - parentWindow->WindowPadding.X * 2 - remainingWidth;
         }
         else if (style.Display == Display.Fill)
         {
-            size.X = parentWindow->Size.X - parentWindow->WindowPadding.X * 2;
+            size.X = parentWindow->Size.X - parentWindow->WindowPadding.X * 2 - remainingWidth;
             size.Y = parentWindow->Size.Y - parentWindow->WindowPadding.Y * 2;
         }
 
@@ -94,7 +94,7 @@ public static unsafe class TextInput
             ImGui.PushStyleColor(ImGuiCol.Text, textColor.ToVector4());
             ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, padding with { Y = (size.Y - style.Font.GetImFont()->FontSize) / 2 });
             ImGui.SetNextItemWidth(size.X - padding.X * 2);
-            ImGui.InputText($"##{id}_input", ref text, maxLength);
+            ImGui.InputTextWithHint($"##{id}_input", placeHolder, ref text, maxLength);
             if (ImGui.IsItemActive())
             {
                 if (active_states.Contains(uId) == false)

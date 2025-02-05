@@ -12,7 +12,7 @@ public static unsafe class Button
 {
     private static readonly Dictionary<uint, float> fade_timers = [];
 
-    public static bool Normal(string id, string label, in ButtonStyle style, bool disabled = false, Vector2 size = default)
+    public static bool Normal(string id, string label, in ButtonStyle style, bool disabled = false, int remainingWidth = 0, Vector2 size = default)
     {
         ImGuiWindow* window = ImGuiP.GetCurrentWindow();
         if (window->SkipItems == 1) return false;
@@ -28,7 +28,7 @@ public static unsafe class Button
 
         if (style.Display == Display.Flex)
         {
-            buttonSize.X = window->Size.X - window->WindowPadding.X * 2;
+            buttonSize.X = window->Size.X - window->WindowPadding.X * 2 - remainingWidth;
         }
 
         if (size != default) buttonSize = size;
