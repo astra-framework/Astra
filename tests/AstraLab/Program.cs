@@ -150,25 +150,31 @@ internal static class Program
         TextDisabledColor = Color.FromArgb(128, 128, 128)
     };
 
-    /*private static readonly ComboBoxStyle comboBoxStyle = new()
+    private static readonly ComboBoxStyle combo_box_style = new()
     {
-        Padding = new Vector2(0, 3),
         Font = font,
-        BackgroundColor = Color.FromArgb(62, 62, 62),
-        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
-        BorderColor = Color.FromArgb(102, 102, 102),
+        Padding = new Vector2(6, 6),
+
         TextColor = Color.White,
+        BorderColor = Color.FromArgb(80, 80, 80),
+
+        BackgroundColor = Color.FromArgb(32, 32, 32),
+        BackgroundHoverColor = Color.FromArgb(42, 42, 42),
+
         BorderThickness = 1f,
-        Radius = 3f
-    };*/
+        Radius = 3f,
+
+        DropdownBackgroundColor = Color.FromArgb(42, 42, 42),
+
+        DropdownRadius = 3f,
+        DropdownBorderSize = 1f
+    };
 
     private static readonly SelectableComboStyle selectableComboStyle = new()
     {
         Font = font,
-        BackgroundColor = Color.FromArgb(80, 80, 80),
         BackgroundHoverColor = Color.FromArgb(100, 100, 100),
         BackgroundActiveColor = Color.FromArgb(60, 60, 60),
-        TextColor = Color.White
     };
 
     private static void Main()
@@ -209,17 +215,6 @@ internal static class Program
 
     private static void onRender()
     {
-        ComboBoxStyle comboBoxStyle = new()
-        {
-            Padding = new Vector2(4, 4),
-            Font = font,
-            BackgroundColor = Color.FromArgb(62, 62, 62),
-            BackgroundHoverColor = Color.FromArgb(124, 124, 124),
-            BorderColor = Color.FromArgb(102, 102, 102),
-            TextColor = Color.White,
-            BorderThickness = 1f,
-            Radius = 3f
-        };
         Panel.Begin("main_child", main_panel);
         {
             if (Button.Normal("test_button_0", "Hello World", button_style))
@@ -244,7 +239,7 @@ internal static class Program
             {
                 Console.WriteLine("Checkbox Pressed!");
             }
-            ComboBox.Normal("combo_1", "Preview", comboBoxStyle, () =>
+            ComboBox.Normal("combo_1", "Preview", combo_box_style, () =>
             {
                 if (Selectable.Combo("Test0", ref test2, selectableComboStyle))
                 {

@@ -6,16 +6,20 @@ namespace Astra.Styles;
 
 public struct ComboBoxStyle
 {
-    public Vector2 Padding;
     public Font Font;
+    public Vector2 Padding;
+
+    public Color TextColor;
+    public Color BorderColor;
 
     public Color BackgroundColor;
     public Color BackgroundHoverColor;
 
-    public Color BorderColor;
-
-    public Color TextColor;
-
     public float BorderThickness;
     public float Radius;
+
+    public Color DropdownBackgroundColor;
+
+    public float DropdownRadius;
+    public float DropdownBorderSize;
 }

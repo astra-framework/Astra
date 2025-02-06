@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Astra.Styles;
+﻿using Astra.Styles;
 using Astra.Util;
 using Hexa.NET.ImGui;
 
@@ -15,27 +14,36 @@ public static unsafe class ComboBox
             width = window->Size.X - window->WindowPadding.X * 2;
         }
         ImGui.PushFont(style.Font.GetImFont());
-        ImGui.PushStyleColor(ImGuiCol.FrameBg, style.BackgroundColor.ToUint32());
+
+        ImGui.PushStyleColor(ImGuiCol.Text, style.TextColor.ToUint32());
         ImGui.PushStyleColor(ImGuiCol.Border, style.BorderColor.ToUint32());
+
+        /* Combobox */
+        ImGui.PushStyleColor(ImGuiCol.FrameBg, style.BackgroundColor.ToUint32());
+        ImGui.PushStyleColor(ImGuiCol.FrameBgHovered, style.BackgroundHoverColor.ToUint32());
         ImGui.PushStyleColor(ImGuiCol.Button, style.BackgroundColor.ToUint32());
-        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, style.BackgroundColor.ToUint32());
-        ImGui.PushStyleColor(ImGuiCol.FrameBgHovered, style.BackgroundColor.ToUint32());
-        ImGui.PushStyleColor(ImGuiCol.FrameBgActive, style.BackgroundColor.ToUint32());
-        ImGui.PushStyleVar(ImGuiStyleVar.PopupRounding, style.Radius);
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, style.BackgroundHoverColor.ToUint32());
+
         ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, style.Radius);
-        ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, style.BorderThickness);
-        ImGui.PushStyleVar(ImGuiStyleVar.PopupBorderSize, style.BorderThickness);
         ImGui.PushStyleVar(ImGuiStyleVar.FramePadding, style.Padding);
-        ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, new Vector2(0, 3));
-        ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 3));
+        ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, style.BorderThickness);
+
+        /* Dropdown */
+        ImGui.PushStyleColor(ImGuiCol.PopupBg, style.DropdownBackgroundColor.ToUint32());
+
+        ImGui.PushStyleVar(ImGuiStyleVar.PopupRounding, style.DropdownRadius);
+        ImGui.PushStyleVar(ImGuiStyleVar.PopupBorderSize, style.DropdownBorderSize);
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, style.Padding); // 0
+        ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing,style.Padding); // 0
+
         ImGui.SetNextItemWidth(width);
         if (ImGui.BeginCombo($"##{id}", preview, ImGuiComboFlags.None))
         {
             content.Invoke();
             ImGui.EndCombo();
         }
-        ImGui.PopStyleColor(6);
         ImGui.PopStyleVar(7);
+        ImGui.PopStyleColor(7);
         ImGui.PopFont();
     }
 }

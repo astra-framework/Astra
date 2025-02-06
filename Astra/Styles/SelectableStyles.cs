@@ -7,9 +7,6 @@ public struct SelectableComboStyle
 {
     public Font Font;
 
-    public Color BackgroundColor;
     public Color BackgroundHoverColor;
     public Color BackgroundActiveColor;
-
-    public Color TextColor;
 }
