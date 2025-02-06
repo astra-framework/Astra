@@ -18,7 +18,7 @@ public static unsafe class Modal
         ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, style.Rounding);
         ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, new Vector2(0, 0));
         ImGui.SetNextWindowSize(size);
-        if (ImGui.BeginPopupModal(name, ref show, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoBringToFrontOnFocus))
+        if (ImGui.BeginPopupModal(name, ref show, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoDecoration | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove))
         {
             if (style.NoTitlebar == false)
             {

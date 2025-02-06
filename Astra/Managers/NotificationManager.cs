@@ -49,7 +49,7 @@ public static unsafe class NotificationManager
             ImGui.PushStyleColor(ImGuiCol.WindowBg, style.BackgroundColor.ToVector4((byte)(alpha * 255)));
             ImGui.PushStyleColor(ImGuiCol.Border, style.BorderColor.ToVector4((byte)(alpha * 255)));
             ImGui.PushStyleColor(ImGuiCol.Text, style.TextColor.ToVector4((byte)(alpha * 255)));
-            if (ImGui.Begin($"ntf_{notification.Title}_{notification.GetHashCode()}", null, ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoFocusOnAppearing))
+            if (ImGui.Begin($"ntf_{notification.Title}_{notification.GetHashCode()}", null, ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoTitleBar))
             {
                 ImGui.Text(notification.Message);
             }
