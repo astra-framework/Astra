@@ -19,10 +19,9 @@ public struct CheckboxStyle
     public Color BackgroundActiveColor;
     public Color BackgroundDisabledColor;
 
-    public Color CheckColor;
-    public Color CheckHoverColor;
-    public Color CheckActiveColor;
-    public Color CheckDisabledColor;
+    public Color CheckmarkColor;
+    public Color CheckmarkHoverColor;
+    public Color CheckmarkDisabledColor;
 
     public Color BorderColor;
     public Color BorderHoverColor;

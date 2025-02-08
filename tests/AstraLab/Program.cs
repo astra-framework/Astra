@@ -124,30 +124,24 @@ internal static class Program
     private static readonly CheckboxStyle checkboxStyle = new CheckboxStyle
     {
         Font = font,
-        Size = 20,
-        BorderThickness = 1,
-        Radius = 3,
-        FadeinSpeed = 400,
-        FadeoutSpeed = 400,
-        BackgroundColor =  Color.FromArgb(62, 62, 62),
-        BackgroundHoverColor = Color.FromArgb(82, 82, 82),
-        BackgroundActiveColor = Color.FromArgb(22, 22, 22),
-        BackgroundDisabledColor = Color.FromArgb(12, 12, 12),
 
-        CheckColor = Color.White,
-        CheckHoverColor = Color.White,
-        CheckActiveColor = Color.White,
-        CheckDisabledColor = Color.FromArgb(128, 128, 128),
+        Size = 12,
+        BorderThickness = 0f,
+        Radius = 3f,
 
-        BorderColor = Color.FromArgb(50, 50, 50),
-        BorderHoverColor = Color.FromArgb(50, 50, 50),
-        BorderActiveColor = Color.FromArgb(50, 50, 50),
-        BorderDisabledColor = Color.FromArgb(50, 50, 50),
+        FadeinSpeed = 500,
+        FadeoutSpeed = 500,
 
-        TextColor = Color.White,
-        TextHoverColor = Color.White,
-        TextActiveColor = Color.White,
-        TextDisabledColor = Color.FromArgb(128, 128, 128)
+        BackgroundColor = Color.FromArgb(50, 50, 50),
+        BackgroundHoverColor = Color.FromArgb(60, 60, 60),
+        BackgroundActiveColor = Color.FromArgb(255, 255, 255),
+
+        CheckmarkColor = Color.FromArgb(26, 26, 26),
+        CheckmarkHoverColor = Color.FromArgb(26, 26, 26),
+
+        TextColor = Color.FromArgb(180, 180, 180),
+        TextHoverColor = Color.FromArgb(230, 230, 230),
+        TextActiveColor = Color.FromArgb(255, 255 ,255)
     };
 
     private static readonly ComboBoxStyle combo_box_style = new()
@@ -237,10 +231,12 @@ internal static class Program
 
             }
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
-            if (Checkbox.Normal("##no_label", ref test1, checkboxStyle))
+            if (Checkbox.Normal("Hello World", ref test1, checkboxStyle))
             {
                 Console.WriteLine("Checkbox Pressed!");
             }
+            ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
+
             ComboBox.Normal("combo_1", "Preview", combo_box_style, () =>
             {
                 if (Selectable.Combo("Test0", ref test2, selectableComboStyle))

@@ -54,4 +54,10 @@ public static unsafe class ImUtils
     {
         return new Vector2((rect.Min.X + rect.Max.X) / 2, (rect.Min.Y + rect.Max.Y) / 2);
     }
+
+
+    public static float GetHeight(this ImRect rect)
+    {
+        return rect.Max.Y - rect.Min.Y;
+    }
 }
