@@ -232,7 +232,9 @@ internal static class Program
             if (Button.Icon("test_button_1", FontAwesome6.FILE, icon_style))
             {
                 test0++;
-                NotificationManager.ShowNotification($"Test{test0}", $"Button Pressed! {test0}", 3);
+                NotificationManager.ShowNotification($"Test{test0}", $"Button Pressed! {test0} 333111222333", 3);
+                NotificationManager.ShowNotification($"Test{test0}", $"Button Pressed!", 3);
+
             }
             ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 8);
             if (Checkbox.Normal("##no_label", ref test1, checkboxStyle))

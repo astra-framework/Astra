@@ -13,5 +13,7 @@ public enum NotificationLocation
 {
     TopCenter,
     TopRight,
-    BottomRight
+    TopLeft,
+    BottomRight,
+    BottomLeft,
 }

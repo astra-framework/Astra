@@ -7,6 +7,8 @@ namespace Astra;
 
 public static class Application
 {
+    internal static IWindow InternalWindow = null!;
+
     public static IWindow CreateWindow(WindowOptions options, TitlebarStyle titlebarStyle, Action onRender, Action? titlebarContentRender = null)
     {
         Titlebar.SetStyle(titlebarStyle);
@@ -21,6 +23,7 @@ public static class Application
             throw new PlatformNotSupportedException("Unsupported platform");
         }
         window.Setup(options, onRender);
+        InternalWindow = window;
         return window;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Astra.Components.Internal;
 using Astra.Data;
 using Astra.Styles;
 using Astra.Util;
@@ -40,7 +41,7 @@ public static unsafe class NotificationManager
                 alpha = Math.Min((notification.Duration - elapsed) / 0.5f, 1.0f);
             }
             ImGui.PushFont(style.Font.GetImFont());
-            Vector2 position = getNotificationPosition(notification, i, ImGui.CalcTextSize(notification.Message).X + (ImGui.CalcTextSize(notification.Message).X * 0.16f));
+            Vector2 position = getNotificationPosition(notification, i, ImGui.CalcTextSize(notification.Message).X);
             ImGui.SetNextWindowPos(position, ImGuiCond.Always, new Vector2());
             ImGui.SetNextWindowBgAlpha(alpha);
             ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, new Vector2(5, 5));
@@ -68,14 +69,20 @@ public static unsafe class NotificationManager
 
         switch (notification.Location)
         {
-            /*case NotificationLocation.TopCenter:
-                position = new Vector2(io->DisplaySize.X / 2, 50 * alpha + offset);
+            case NotificationLocation.TopCenter:
+                position = new Vector2((io->DisplaySize.X - textWidth) / 2, Titlebar.GetHeight(Application.InternalWindow) + 10 + offset);
                 break;
             case NotificationLocation.TopRight:
-                position = new Vector2(io->DisplaySize.X - 250 * alpha, 50 * alpha + offset);
-                break;*/
+                position = new Vector2(io->DisplaySize.X - (20 + textWidth), Titlebar.GetHeight(Application.InternalWindow) + 10 + offset);
+                break;
+            case NotificationLocation.TopLeft:
+                position = new Vector2(10, Titlebar.GetHeight(Application.InternalWindow) + 10 + offset);
+                break;
             case NotificationLocation.BottomRight:
-                position = new Vector2(io->DisplaySize.X - (5 + textWidth), io->DisplaySize.Y - 40 - offset);
+                position = new Vector2(io->DisplaySize.X - (20 + textWidth), io->DisplaySize.Y - 40 - offset);
+                break;
+            case NotificationLocation.BottomLeft:
+                position = new Vector2(10, io->DisplaySize.Y - 40 - offset);
                 break;
         }
         return position;
