@@ -267,6 +267,11 @@ public static unsafe class Button
             hovered = hovered = pressed = false;
         }
 
+        if (selected)
+        {
+            hovered = held = false;
+        }
+
         if (style.Display != Display.Hidden)
         {
             Color backgroundColor;
