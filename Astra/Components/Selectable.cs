@@ -7,6 +7,7 @@ namespace Astra.Components;
 
 public static unsafe class Selectable
 {
+    [Obsolete("Use Selectable from Button class instead.")]
     public static bool Combo(string label, ref bool selected, in SelectableComboStyle style)
     {
         ImGui.PushFont(style.Font.GetImFont());
@@ -18,6 +19,7 @@ public static unsafe class Selectable
         return result;
     }
 
+    [Obsolete("Use Selectable from Button class instead.")]
     public static bool Combo(string label, bool selected, in SelectableComboStyle style)
     {
         ImGui.PushFont(style.Font.GetImFont());
