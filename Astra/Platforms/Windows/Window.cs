@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using Astra.Backends;
 using Astra.Components.Internal;
 using Astra.Data;
-using Astra.Types.Enums;
 using Astra.Types.Interfaces;
 using Hexa.NET.ImGui.Backends.Win32;
 using TerraFX.Interop.Windows;
@@ -30,22 +29,11 @@ public unsafe class Window : IWindow
 
     public void Setup(in WindowOptions windowOptions, Action onRender)
     {
-        Console.WriteLine("Setting up window");
         options = windowOptions;
         managedWndProc = wndProc;
 
-        switch (options.BackendApi)
-        {
-            case BackendApi.Auto:
-                Backend = new Direct3D11();
-                break;
-            case BackendApi.D3D11:
-                Backend = new Direct3D11();
-                break;
-            default:
-                Backend = new Direct3D11();
-                break;
-        }
+        // When more backends are added, this will be changed to a switch statement
+        Backend = new Direct3D11();
 
         Backend.OnRender = onRender;
 
@@ -79,15 +67,11 @@ public unsafe class Window : IWindow
                 lpszClassName = pClassName
             };
 
-            Console.WriteLine("Registering window class");
             RegisterClassExW(&lWndClass);
             wndClass = lWndClass;
 
-            Console.WriteLine("Class registered, Creating window");
-            handle = CreateWindowExW(0, pClassName, pTitle, options.Resizable ? WS.WS_OVERLAPPEDWINDOW : WS.WS_POPUP, x, y, options.Size.Width, options.Size.Height, HWND.NULL, HMENU.NULL, wndClass.hInstance, null);
-
+            handle = CreateWindowExW(0, pClassName, pTitle, WS.WS_OVERLAPPEDWINDOW, x, y, options.Size.Width, options.Size.Height, HWND.NULL, HMENU.NULL, wndClass.hInstance, null);
         }
-        Console.WriteLine($"Created window with handle: {handle}");
 
         Backend.Setup(this);
         Platform.SetWindowStyle(handle, options);
@@ -167,18 +151,21 @@ public unsafe class Window : IWindow
 
     public void Minimize()
     {
+        OnMinimize?.Invoke();
         ShowWindow(handle, SW.SW_MINIMIZE);
     }
 
 
     public void Maximize()
     {
+        OnMaximize?.Invoke();
         ShowWindowAsync(handle, SW.SW_MAXIMIZE);
     }
 
 
     public void Restore()
     {
+        OnRestore?.Invoke();
         ShowWindowAsync(handle, SW.SW_RESTORE);
     }
 
@@ -197,6 +184,7 @@ public unsafe class Window : IWindow
 
     public void Close()
     {
+        OnClose?.Invoke();
         PostMessageW(handle, WM.WM_CLOSE, 0, 0);
     }
 
@@ -213,6 +201,13 @@ public unsafe class Window : IWindow
     {
         return handle;
     }
+
+
+    public event Action? OnClose;
+    public event Action? OnMinimize;
+    public event Action? OnMaximize;
+    public event Action? OnRestore;
+    public event Action<string>? OnFileDrop;
 
 
     private LRESULT wndProc(HWND window, uint msg, WPARAM wParam, LPARAM lParam)
@@ -314,6 +309,20 @@ public unsafe class Window : IWindow
                 }
                 return HTCLIENT;
             }
+            case WM.WM_DROPFILES:
+            {
+                HDROP hDrop = (HDROP)wParam;
+                uint fileCount = DragQueryFileW(hDrop, 0xFFFFFFFF, null, 0);
+
+                for (uint i = 0; i < fileCount; i++)
+                {
+                    uint fileNameLength = DragQueryFileW(hDrop, i, null, 0) + 1;
+                    onFileDropped(hDrop, i, fileNameLength);
+                }
+
+                DragFinish(hDrop);
+                return 0;
+            }
             case WM.WM_DESTROY:
             {
                 PostQuitMessage(0);
@@ -321,5 +330,13 @@ public unsafe class Window : IWindow
             }
         }
         return DefWindowProcW(window, msg, wParam, lParam);
+    }
+
+
+    private void onFileDropped(in HDROP hDrop, uint index, uint fileNameLength)
+    {
+        char* fileName = stackalloc char[(int)fileNameLength];
+        DragQueryFileW(hDrop, index, fileName, fileNameLength);
+        OnFileDrop?.Invoke(new string(fileName));
     }
 }

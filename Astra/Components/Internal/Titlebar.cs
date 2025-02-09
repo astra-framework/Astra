@@ -44,7 +44,7 @@ public static unsafe class Titlebar
         }
         ImGui.SameLine();
         ImGui.SetCursorPosX(window->Size.X - titlebarRect.Max.Y * 2 + (OperatingSystem.IsWindows() && context.IsMaximized() ? Platforms.Windows.Platform.MAXIMIZED_PADDING.X : 0));
-        if (WindowsTitlebarButton("toggle_state_caption_btn", context.IsMaximized() ? Platforms.Windows.Platform.RESTORE_ICON : Platforms.Windows.Platform.MAXIMIZE_ICON, false, new Vector2(style.Height)))
+        if (WindowsTitlebarButton("toggle_state_caption_btn", context.IsMaximized() ? Platforms.Windows.Platform.RESTORE_ICON : Platforms.Windows.Platform.MAXIMIZE_ICON, context.CanResize() == false, new Vector2(style.Height)))
         {
             if (context.IsMaximized())
                 context.Restore();

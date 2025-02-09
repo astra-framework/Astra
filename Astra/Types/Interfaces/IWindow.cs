@@ -36,4 +36,11 @@ public interface IWindow
     public Size GetSize();
 
     public nint GetHandle();
+
+
+    public event Action OnClose;
+    public event Action OnMinimize;
+    public event Action OnMaximize;
+    public event Action OnRestore;
+    public event Action<string> OnFileDrop;
 }

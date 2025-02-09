@@ -11,8 +11,7 @@ public static unsafe class FontManager
     {
         fonts_to_load.Add(font);
     }
-
-
+    
     public static void AddFonts(params Font[] fonts)
     {
         foreach (var font in fonts)

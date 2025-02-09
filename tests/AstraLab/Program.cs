@@ -183,7 +183,18 @@ internal static class Program
             Radius = 3f,
             BorderThickness = 1
         });
-        IWindow window = Application.CreateWindow(WindowOptions.DEFAULT, new TitlebarStyle
+        var options = new WindowOptions()
+        {
+            Title = "Astra Window",
+            ClassName = "astra",
+            Size = new Size(800, 500),
+            MinSize = new Size(300, 100),
+            StartPosition = new Point(-1, -1),
+            Resizable = false,
+            NativeBorder = true,
+            BackendApi = BackendApi.Auto
+        };
+        IWindow window = Application.CreateWindow(options, new TitlebarStyle
         {
             Height = 40,
             BackgroundColor = Color.FromArgb(32, 32, 32),
