@@ -286,7 +286,7 @@ public static unsafe class Button
             }
             else
             {
-                if (hovered)
+                if (hovered || selected)
                 {
                     fade_timers.TryAdd(uId, 0);
                     fade_timers[uId] += io->DeltaTime * style.FadeinSpeed / 100f;
@@ -397,6 +397,11 @@ public static unsafe class Button
             hovered = hovered = pressed = false;
         }
 
+        if (selected)
+        {
+            hovered = held = false;
+        }
+
         if (style.Display != Display.Hidden)
         {
             Color backgroundColor;
@@ -411,7 +416,7 @@ public static unsafe class Button
             }
             else
             {
-                if (hovered)
+                if (hovered || selected)
                 {
                     fade_timers.TryAdd(uId, 0);
                     fade_timers[uId] += io->DeltaTime * style.FadeinSpeed / 100f;
